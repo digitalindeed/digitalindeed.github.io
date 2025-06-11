@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Share Button Demo</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://digitalindeed.github.io">
+    <meta property="og:title" content="Facebook Share Button Demo">
+    <meta property="og:description" content="This is a demo page showing how to implement Facebook share button with Open Graph tags">
+    <meta property="og:image" content="https://github.com/digitalindeed/digitalindeed.github.io.git/images/cute-cat-potrait.jpg">
+    
+<!-- Load Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v18.0&appId=520088942090750&autoLogAppEvents=1" nonce="random"></script>
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .image-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .image-container img {
+            width: 50%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+    </style>
+    
+    <div class="container">
+        <h1>Facebook Share Button Demo</h1>
+        
+    
+    <!-- Facebook Share Button -->
+    <div class="fb-share-button" 
+         data-href="https://www.innnews.co.th/lifestyle/news_605845/" 
+         data-layout="button_count"
+         data-size="large">
+        <a target="_blank" 
+           href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyour-website-url.com&amp;src=sdkpreparse" 
+           class="fb-xfbml-parse-ignore">
+            Share
+        </a>
+    </div>
+
+    <!-- Custom Share Button -->
+    <button onclick="shareToFacebook()" style="padding: 10px 20px; background-color: #4267B2; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Share to Facebook
+    </button>
+
+    <script>
+        // Initialize Facebook SDK
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '520088942090750',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v18.0'
+            });
+        };
+
+        // Custom share function
+        function shareToFacebook() {
+            FB.ui({
+                method: 'share',
+                href: 'https://www.innnews.co.th/lifestyle/news_605845/',
+                quote: 'Check out this amazing content!'
+            }, function(response){
+                if (response && !response.error_code) {
+                    console.log('Share was successful!');
+                } else {
+                    console.log('Share was not successful!');
+                }
+            });
+        }
+
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v18.0&appId=520088942090750&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <br/>&nbsp;<br/><br/><br/><br/>
+    <div class="image-container">
+        <img src="https://www.innnews.co.th/wp-content/uploads/2023/08/cute-cat-potrait.jpg" alt="Cute Cat">
+    </div>
+
+</body>
+</html>

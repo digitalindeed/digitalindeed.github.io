@@ -89,22 +89,28 @@
     ข้อดี:มี callback custom ปุ่มเองได้<br/>
     ข้อเสีย: ค่อนข้าง config ยาก ต้องมี AppID ที่ verify  domain/ธุรกิจ (และอีกมากมาย)<br/>
     <!-- Custom Share Button -->
-    <button onclick="shareToFacebook()" style="padding: 10px 20px; background-color: #4267B2; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    <button onclick="shareToFB()" style="padding: 10px 20px; background-color: #4267B2; color: white; border: none; border-radius: 5px; cursor: pointer;">
         Share to Facebook
     </button>
 //debug script
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk/debug.js"></script> 
     <script>
-        // Initialize Facebook SDK
-        window.fbAsyncInit = function() {
-            FB.init({
-                // appId            : '520088942090750',
-                appId            :'1417290872931496',
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v18.0'
-            });
-        };
+ function shareToFB() {
+    FB.ui({
+      method: 'share',
+      href: 'https://digitalindeed.github.io/', // URL ที่จะแชร์
+    }, function(response){
+      if (response && !response.error_message) {
+        console.log('แชร์สำเร็จ');
+        // 🔍 Track ด้วย Google Analytics (GA4 ตัวอย่าง)
+        alert('แชร์สำเร็จ');
+      } else {
+        console.log('การแชร์ถูกยกเลิกหรือเกิดข้อผิดพลาด');
+        alert('การแชร์ถูกยกเลิกหรือเกิดข้อผิดพลาด');
+      }
+    });
+  }
+     
 
         // Custom share function
         function shareToFacebook() {
